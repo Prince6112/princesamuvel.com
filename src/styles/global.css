@@ -454,3 +454,61 @@ nav a[aria-current='page'] {
     gap: 0.15rem;
   }
 }
+
+/* Recommendations */
+
+.recs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: var(--measure);
+}
+
+.recs li {
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.recs li:first-child {
+  padding-top: 0;
+}
+
+.recs li:last-child {
+  border-bottom: 0;
+}
+
+.recs .meta {
+  margin: 0.2rem 0 0.6rem;
+}
+
+.recs p:last-child {
+  margin: 0;
+  color: #3a3833;
+}
+
+/* Call to action */
+
+.cta {
+  margin-top: 4.5rem;
+  padding: 2.25rem 1.75rem;
+  background: var(--accent-soft);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.cta p {
+  max-width: 34rem;
+  margin: 0.75rem auto 1.4rem;
+  color: #3a3833;
+}
+
+@media (max-width: 560px) {
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav {
+    gap: 1.1rem;
+  }
+}

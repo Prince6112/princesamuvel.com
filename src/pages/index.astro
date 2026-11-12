@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import EntryList from '../components/EntryList.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import Cta from '../components/Cta.astro';
 import { site, websites, marketing } from '../site';
 import { getWritings } from '../writings';
 
@@ -42,4 +43,6 @@ const featured = [...websites, ...marketing].filter((p) => p.featured);
       </div>
     </section>
   </div>
+
+  <Cta />
 </Base>

@@ -58,13 +58,22 @@ export const websites: Project[] = [
     title: 'Zyan Events',
     kind: 'Website',
     summary:
-      'One-page site for an event planning team in Pune and PCMC covering birthdays, corporate events and community gatherings.',
+      'One-page site for Zyan Events, an event management venture my roommates and I started, planning birthdays, corporate events and community gatherings in Pune and PCMC.',
     points: [
       'Event-type picker that opens WhatsApp with a pre-filled message',
       'Enquiry form, process walkthrough and FAQ',
     ],
     url: 'https://endearing-sundae-d57af2.netlify.app',
     linkLabel: 'Visit site',
+  },
+  {
+    title: 'Naveen Joshua',
+    kind: 'Website',
+    summary: 'Something amazing is coming. Stay tuned.',
+    points: [],
+    url: 'https://naveenjoshua.com/',
+    linkLabel: 'Take a peek',
+    status: 'In progress',
   },
 ];
 
@@ -96,5 +105,31 @@ export const apps: Project[] = [
       'A personal finance tracker for keeping my own money matters in one place.',
     points: ['Personal use, kept behind a login'],
     status: 'Private',
+  },
+];
+
+// Shown on the Recommendations page.
+export type Book = { title: string; author: string; note: string };
+
+export const books: Book[] = [
+  {
+    title: 'Mere Christianity',
+    author: 'C. S. Lewis',
+    note: 'Adapted from talks Lewis gave on BBC radio during the Second World War. He starts from the sense of right and wrong we all carry and builds a clear, reasoned case for the Christian faith, sticking to what believers across traditions hold in common.',
+  },
+  {
+    title: 'Stop, in the Name of God',
+    author: 'Charlie Kirk',
+    note: 'A call to recover the Sabbath: one day each week to stop, rest and turn your attention back to God. A timely read for a life that never seems to switch off.',
+  },
+  {
+    title: 'The Purpose Driven Life',
+    author: 'Rick Warren',
+    note: 'Forty short daily readings built around one question: what on earth am I here for? Warren answers that you were made by God and for God, and walks through what that means for everyday life.',
+  },
+  {
+    title: 'God and Money',
+    author: 'Gregory Baumer and John Cortines',
+    note: 'Two Harvard Business School classmates set out to study what the Bible says about wealth. The result is a practical look at earning, saving and giving, and at the question of how much is enough.',
   },
 ];

@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import { books } from '../site';
+---
+
+<Base
+  title="My Recommendations"
+  description="Books and videos that made a profound impact on Prince Samuvel."
+>
+  <header class="page-head">
+    <p class="eyebrow">My Recommendations</p>
+    <h1>What shaped me</h1>
+    <p class="lede">The books and YouTube videos that have made a profound impact on me.</p>
+  </header>
+
+  <section>
+    <div class="section-head"><h2>Books</h2></div>
+    <ol class="recs">
+      {
+        books.map((book) => (
+          <li>
+            <h3>{book.title}</h3>
+            <p class="meta">{book.author}</p>
+            <p>{book.note}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><h2>YouTube videos</h2></div>
+    <p class="meta">Coming soon. The list will be uploaded here.</p>
+  </section>
+</Base>

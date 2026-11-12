@@ -15,9 +15,15 @@ const { project } = Astro.props;
   </div>
   <h3>{project.title}</h3>
   <p>{project.summary}</p>
-  <ul>
-    {project.points.map((point) => <li>{point}</li>)}
-  </ul>
+  {
+    project.points.length > 0 && (
+      <ul>
+        {project.points.map((point) => (
+          <li>{point}</li>
+        ))}
+      </ul>
+    )
+  }
   {
     project.url && (
       <a class="card-link" href={project.url} target="_blank" rel="noopener">
