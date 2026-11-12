@@ -7,7 +7,11 @@ import { site } from '../site';
   <p>
     Let's connect and build something great. I'm also open to cool AI projects.
   </p>
-  <a class="button primary" href={site.links.linkedin} target="_blank" rel="noopener">
-    Connect on LinkedIn
-  </a>
+  <div class="cta-actions">
+    <a class="button primary" href={`mailto:${site.email}`}>Email me</a>
+    <a class="button" href={site.links.linkedin} target="_blank" rel="noopener">
+      Connect on LinkedIn
+    </a>
+  </div>
+  <p class="cta-email">{site.email}</p>
 </section>

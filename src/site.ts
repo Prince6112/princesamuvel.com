@@ -4,10 +4,11 @@
 export const site = {
   name: 'Prince Samuvel',
   domain: 'princesamuvel.com',
-  tagline: 'Writing what God puts on my heart, and building things for the web.',
+  tagline: 'Building things for the web, and writing what God puts on my heart.',
   description:
-    'Personal site of Prince Samuvel: reflections on faith, and a showcase of websites, apps and data work.',
+    'Personal site of Prince Samuvel: websites, apps and data work, and reflections on faith.',
   location: 'Pune, India',
+  email: 'prince.sam.ss@gmail.com',
   links: {
     linkedin: 'https://www.linkedin.com/in/prince-samuvel/',
     github: 'https://github.com/Prince6112',
@@ -22,6 +23,9 @@ export type Project = {
   url?: string;
   linkLabel?: string;
   status?: string;
+  // Screenshot shown on the card. Put the file in public/work/ and it appears
+  // automatically; if the file is missing, the card simply shows no image.
+  image?: string;
   featured?: boolean;
 };
 
@@ -37,6 +41,7 @@ export const websites: Project[] = [
       'Deployed from GitHub to Cloudflare',
     ],
     url: 'https://a2h-badminton.prince-sam-ss.workers.dev/',
+    image: '/work/a2h.jpg',
     linkLabel: 'Visit site',
     featured: true,
   },
@@ -51,6 +56,7 @@ export const websites: Project[] = [
       'Workshops, about and contact pages',
     ],
     url: 'https://gospel-supplies.vercel.app/',
+    image: '/work/gospel-supplies.jpg',
     linkLabel: 'Visit site',
     featured: true,
   },
@@ -64,7 +70,9 @@ export const websites: Project[] = [
       'Enquiry form, process walkthrough and FAQ',
     ],
     url: 'https://endearing-sundae-d57af2.netlify.app',
+    image: '/work/zyan-events.jpg',
     linkLabel: 'Visit site',
+    featured: true,
   },
   {
     title: 'Naveen Joshua',
@@ -72,6 +80,7 @@ export const websites: Project[] = [
     summary: 'Something amazing is coming. Stay tuned.',
     points: [],
     url: 'https://naveenjoshua.com/',
+    image: '/work/naveen-joshua.jpg',
     linkLabel: 'Take a peek',
     status: 'In progress',
   },
@@ -85,7 +94,6 @@ export const marketing: Project[] = [
       'Running Google ads for a dental clinic in Pune, focused on its Google Business Profile and Google Maps so nearby patients find it first.',
     points: ['Google Business Profile and Maps campaigns', 'Aimed at people searching nearby'],
     status: 'Ongoing',
-    featured: true,
   },
 ];
 

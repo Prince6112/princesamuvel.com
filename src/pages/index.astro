@@ -15,34 +15,32 @@ const featured = [...websites, ...marketing].filter((p) => p.featured);
     <p class="eyebrow">{site.location}</p>
     <h1>Hi, I'm Prince.</h1>
     <p class="lede">
-      I write down what God puts on my heart, and I build things for the web. By day I'm a data
-      scientist in healthcare. This is where the writing and the building live.
+      I build things for the web, and I write down what God puts on my heart. By day I'm a data
+      scientist in healthcare. This is where the building and the writing live.
     </p>
     <div class="hero-links">
-      <a class="button primary" href="/writings/">Read the writings</a>
-      <a class="button" href="/work/">See my work</a>
+      <a class="button primary" href="/work/">See my work</a>
+      <a class="button" href="/writings/">Read the writings</a>
     </div>
   </section>
 
-  <div class="home-grid">
-    <section class="section">
-      <div class="section-head">
-        <h2>Latest writings</h2>
-        <a class="more" href="/writings/">All writings →</a>
-      </div>
-      <EntryList entries={latest} />
-    </section>
+  <section class="section">
+    <div class="section-head">
+      <h2>Selected work</h2>
+      <a class="more" href="/work/">All work →</a>
+    </div>
+    <div class="cards">
+      {featured.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </section>
 
-    <section class="section">
-      <div class="section-head">
-        <h2>Selected work</h2>
-        <a class="more" href="/work/">All work →</a>
-      </div>
-      <div class="cards stack">
-        {featured.map((project) => <ProjectCard project={project} />)}
-      </div>
-    </section>
-  </div>
+  <section class="section">
+    <div class="section-head">
+      <h2>Latest writings</h2>
+      <a class="more" href="/writings/">All writings →</a>
+    </div>
+    <EntryList entries={latest} />
+  </section>
 
   <Cta />
 </Base>

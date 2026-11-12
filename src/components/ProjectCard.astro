@@ -1,4 +1,5 @@
 ---
+import { existsSync } from 'node:fs';
 import type { Project } from '../site';
 
 interface Props {
@@ -6,9 +7,22 @@ interface Props {
 }
 
 const { project } = Astro.props;
+
+// Only show the screenshot if the file is actually in the public folder.
+const hasImage = project.image ? existsSync(`./public${project.image}`) : false;
 ---
 
 <article class="card">
+  {
+    hasImage && (
+      <img
+        class="card-shot"
+        src={project.image}
+        alt={`Screenshot of the ${project.title} website`}
+        loading="lazy"
+      />
+    )
+  }
   <div class="card-top">
     <span class="kind">{project.kind}</span>
     {project.status && <span class="status">{project.status}</span>}
