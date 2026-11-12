@@ -1,0 +1,42 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+
+interface Props {
+  entries: CollectionEntry<'writings'>[];
+}
+
+const { entries } = Astro.props;
+const fmt = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+
+const items = await Promise.all(
+  entries.map(async (entry) => ({
+    entry,
+    Content: entry.data.type === 'note' ? (await render(entry)).Content : null,
+  })),
+);
+---
+
+<ul class="entries">
+  {
+    items.map(({ entry, Content }) => (
+      <li>
+        <span class="meta">
+          {fmt.format(entry.data.date)} · {entry.data.type === 'note' ? 'Note' : 'Reflection'}
+        </span>
+        {Content ? (
+          <blockquote class="note">
+            <Content />
+            {entry.data.source && <footer>{entry.data.source}</footer>}
+          </blockquote>
+        ) : (
+          <div>
+            <a class="entry-title" href={`/writings/${entry.id}/`}>
+              {entry.data.title}
+            </a>
+            {entry.data.description && <p>{entry.data.description}</p>}
+          </div>
+        )}
+      </li>
+    ))
+  }
+</ul>

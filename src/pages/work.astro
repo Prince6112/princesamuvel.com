@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { websites, marketing, apps } from '../site';
+---
+
+<Base title="Work" description="Websites, marketing, apps and data work by Prince Samuvel.">
+  <header class="page-head">
+    <p class="eyebrow">Work</p>
+    <h1>Things I've built</h1>
+    <p class="lede">
+      Websites for small businesses, local advertising, a couple of apps I use myself, and a day
+      job in data science.
+    </p>
+  </header>
+
+  <section>
+    <div class="section-head"><h2>Websites</h2></div>
+    <div class="cards">
+      {websites.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><h2>Marketing</h2></div>
+    <div class="cards">
+      {marketing.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><h2>Apps</h2></div>
+    <div class="cards">
+      {apps.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><h2>Data science</h2></div>
+    <div class="about">
+      <p>
+        I work as a data scientist in healthcare, where I build risk scoring models and answer
+        business questions with data. The work is reviewed closely, so I care about analysis that
+        holds up when someone checks it.
+      </p>
+      <p>
+        I have also completed a Professional Certificate Programme in Agentic AI and Applications
+        from IITM Pravartak (IIT Madras), covering RAG pipelines and multi-agent orchestration
+        with LangChain, CrewAI and AutoGen.
+      </p>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import EntryList from '../components/EntryList.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { site, websites, marketing } from '../site';
+import { getWritings } from '../writings';
+
+const latest = (await getWritings()).slice(0, 3);
+const featured = [...websites, ...marketing].filter((p) => p.featured);
+---
+
+<Base>
+  <section class="hero">
+    <p class="eyebrow">{site.location}</p>
+    <h1>Hi, I'm Prince.</h1>
+    <p class="lede">
+      I write down what God puts on my heart, and I build things for the web. By day I'm a data
+      scientist in healthcare. This is where the writing and the building live.
+    </p>
+    <div class="hero-links">
+      <a class="button primary" href="/writings/">Read the writings</a>
+      <a class="button" href="/work/">See my work</a>
+    </div>
+  </section>
+
+  <div class="home-grid">
+    <section class="section">
+      <div class="section-head">
+        <h2>Latest writings</h2>
+        <a class="more" href="/writings/">All writings →</a>
+      </div>
+      <EntryList entries={latest} />
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Selected work</h2>
+        <a class="more" href="/work/">All work →</a>
+      </div>
+      <div class="cards stack">
+        {featured.map((project) => <ProjectCard project={project} />)}
+      </div>
+    </section>
+  </div>
+</Base>

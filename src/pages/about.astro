@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../site';
+---
+
+<Base title="About" description="About Prince Samuvel.">
+  <div class="about">
+    <header class="page-head">
+      <p class="eyebrow">About</p>
+      <h1>About me</h1>
+    </header>
+
+    <div class="prose">
+      <p>
+        I'm Prince, a data scientist in healthcare, based in Pune. Outside of work I build
+        websites for small businesses and write.
+      </p>
+      <p>
+        This site started with Matthew 25. Each servant in that parable was trusted with
+        something and asked to be faithful with it. Building for the web and writing are what I
+        have been given, so this is where I put them to use.
+      </p>
+      <p>
+        <a href="/writings/faithful-with-the-talent/">Read the longer version →</a>
+      </p>
+    </div>
+
+    <dl class="facts">
+      <div>
+        <dt>Based in</dt>
+        <dd>{site.location}</dd>
+      </div>
+      <div>
+        <dt>Day job</dt>
+        <dd>Data scientist in healthcare</dd>
+      </div>
+      <div>
+        <dt>On the side</dt>
+        <dd>Websites, local ads, and writing</dd>
+      </div>
+      <div>
+        <dt>Find me</dt>
+        <dd>
+          <a href={site.links.linkedin} rel="me noopener">LinkedIn</a> ·
+          <a href={site.links.github} rel="me noopener">GitHub</a>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</Base>

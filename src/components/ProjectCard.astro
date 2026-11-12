@@ -1,0 +1,28 @@
+---
+import type { Project } from '../site';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<article class="card">
+  <div class="card-top">
+    <span class="kind">{project.kind}</span>
+    {project.status && <span class="status">{project.status}</span>}
+  </div>
+  <h3>{project.title}</h3>
+  <p>{project.summary}</p>
+  <ul>
+    {project.points.map((point) => <li>{point}</li>)}
+  </ul>
+  {
+    project.url && (
+      <a class="card-link" href={project.url} target="_blank" rel="noopener">
+        {project.linkLabel ?? 'Visit'} →
+      </a>
+    )
+  }
+</article>
