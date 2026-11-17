@@ -35,6 +35,7 @@ const netPath = links
 <Base>
   <!-- Hero -->
   <section class="hero" aria-labelledby="hero-name">
+    <img class="hero-photo" src="/photo-hero.jpg" alt="" width="800" height="1000" decoding="async" />
     <svg
       class="hero-net"
       viewBox="0 0 1000 600"
@@ -83,23 +84,12 @@ const netPath = links
     <!-- 01 The approach -->
     <section id="approach" class="section" aria-labelledby="approach-title">
       <p class="eyebrow rule-label">01 / The approach</p>
-      <div class="approach">
-        <figure class="portrait">
-          <img
-            src="/photo.jpg"
-            alt={`Photo of ${site.name}`}
-            width="960"
-            height="1200"
-            loading="lazy"
-            decoding="async"
-          />
-          <figcaption><span class="live-dot" aria-hidden="true"></span>{site.location}</figcaption>
-        </figure>
+      <div class="split">
+        <h2 id="approach-title" class="display">
+          <span class="line">Faithful with</span>
+          <span class="line faded">what I've been given<span class="dot">.</span></span>
+        </h2>
         <div class="split-body">
-          <h2 id="approach-title" class="display">
-            <span class="line">Faithful with</span>
-            <span class="line faded">what I've been given<span class="dot">.</span></span>
-          </h2>
           <p>
             I'm Prince, a data scientist in healthcare, based in Pune. Outside of work I build
             websites for small businesses and the people around me, and I write.
