@@ -71,6 +71,12 @@ import { site, websites, marketing, apps } from '../site';
           }
         </div>
       </div>
+      <div class="toolkit">
+        <p class="eyebrow">My everyday toolkit</p>
+        <ul>
+          {site.toolkit.map((tool) => <li>{tool}</li>)}
+        </ul>
+      </div>
     </section>
 
     <Cta />

@@ -60,8 +60,8 @@ const netPath = links
       </h1>
       <p class="hero-lede">{site.intro}</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="#work">Explore my work <span aria-hidden="true">↗</span></a>
-        <a class="btn btn-ghost" href="#writings">Read the writings <span aria-hidden="true">↗</span></a>
+        <a class="btn btn-primary" href="/work/">Explore my work <span aria-hidden="true">↗</span></a>
+        <a class="btn btn-ghost" href="/writings/">Read the writings <span aria-hidden="true">↗</span></a>
       </div>
     </div>
 
@@ -105,12 +105,6 @@ const netPath = links
           <a class="mono-link strong" href="/about/">A little more about me <span aria-hidden="true">↗</span></a>
         </div>
       </div>
-      <div class="toolkit">
-        <p class="eyebrow">My everyday toolkit</p>
-        <ul>
-          {site.toolkit.map((tool) => <li>{tool}</li>)}
-        </ul>
-      </div>
     </section>
 
     <!-- 02 Work -->
@@ -152,64 +146,10 @@ const netPath = links
       <a class="mono-link" href="/writings/">More from the notebook <span aria-hidden="true">→</span></a>
     </section>
 
-    <!-- 05 By day -->
-    <section id="by-day" class="section" aria-labelledby="byday-title">
-      <div class="byday">
-        <div class="byday-visual">
-          {
-            site.photo ? (
-              <img src={site.photo} alt={`Photo of ${site.name}`} loading="lazy" />
-            ) : (
-              <>
-                <div class="terminal-bar" aria-hidden="true">
-                  <span />
-                  <span />
-                  <span />
-                </div>
-                <div class="terminal" role="group" aria-label="Summary of my day job">
-                  <p><span class="prompt">$</span> whoami</p>
-                  <p class="out">data scientist, healthcare</p>
-                  <p><span class="prompt">$</span> focus</p>
-                  <p class="out">risk scoring · analysis that holds up</p>
-                  <p><span class="prompt">$</span> learning</p>
-                  <p class="out">agentic AI · RAG · multi-agent systems</p>
-                </div>
-              </>
-            )
-          }
-          <span class="byday-caption"><span class="live-dot" aria-hidden="true"></span>Analysis that holds up.</span>
-        </div>
-        <div class="byday-body">
-          <p class="eyebrow">05 / By day</p>
-          <h2 id="byday-title" class="display">
-            <span class="line">From data</span>
-            <span class="line">to decisions<span class="dot">.</span></span>
-          </h2>
-          <p>
-            I work as a data scientist in healthcare, where I build risk scoring models and answer
-            business questions with data. The work is reviewed closely, so I care about analysis
-            that holds up when someone checks it.
-          </p>
-          <p>
-            I've also completed a Professional Certificate Programme in Agentic AI and Applications
-            from IITM Pravartak (IIT Madras), covering RAG pipelines and multi-agent orchestration
-            with LangChain, CrewAI and AutoGen.
-          </p>
-          {
-            site.resume && (
-              <a class="mono-link strong" href={site.resume}>
-                Résumé (PDF) <span aria-hidden="true">↗</span>
-              </a>
-            )
-          }
-        </div>
-      </div>
-    </section>
-
-    <!-- 06 Shelf -->
+    <!-- 05 Shelf -->
     <section id="shelf" class="section" aria-label="Books">
       <SectionHead
-        index="06"
+        index="05"
         label="On my shelf"
         title="Books that shaped me"
         link={{ href: '/recommendations/', label: 'All recommendations' }}

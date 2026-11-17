@@ -29,9 +29,6 @@ export const site = {
   // Put your résumé at public/resume.pdf and set this to '/resume.pdf'.
   // While it is empty, no résumé link is shown.
   resume: '',
-  // Put a photo at public/photo.jpg and set this to '/photo.jpg'.
-  // While it is empty, the "By day" section shows a small terminal panel instead.
-  photo: '',
 };
 
 export type Project = {
