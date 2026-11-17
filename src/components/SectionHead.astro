@@ -1,0 +1,45 @@
+---
+// Section heading in the style: "02 / LABEL" over a large serif title with a green full stop.
+interface Props {
+  index?: string; // "02"
+  label: string; // "Built with care"
+  title: string; // "Things I've built" (no full stop; one is added)
+  titleMuted?: string; // optional second line in grey
+  note?: string; // short line on the right
+  link?: { href: string; label: string };
+  level?: 'h1' | 'h2';
+}
+
+const { index, label, title, titleMuted, note, link, level = 'h2' } = Astro.props;
+const Heading = level;
+---
+
+<div class="section-head">
+  <p class="eyebrow">{index ? `${index} / ${label}` : label}</p>
+  <div class="section-head-row">
+    <Heading class="display">
+      {
+        titleMuted ? (
+          <>
+            <span class="line">{title}</span>
+            <span class="line faded">{titleMuted}<span class="dot">.</span></span>
+          </>
+        ) : (
+          <>{title}<span class="dot">.</span></>
+        )
+      }
+    </Heading>
+    {
+      (note || link) && (
+        <div class="section-side">
+          {note && <p>{note}</p>}
+          {link && (
+            <a class="mono-link" href={link.href}>
+              {link.label} <span aria-hidden="true">→</span>
+            </a>
+          )}
+        </div>
+      )
+    }
+  </div>
+</div>

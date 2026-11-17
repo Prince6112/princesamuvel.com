@@ -1,6 +1,7 @@
 ---
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import Cta from '../../components/Cta.astro';
 import { getWritings } from '../../writings';
 
 export async function getStaticPaths() {
@@ -11,19 +12,28 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const fmt = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+const kind = entry.data.type === 'note' ? 'Note' : 'Reflection';
 ---
 
 <Base title={entry.data.title} description={entry.data.description}>
-  <a class="back" href="/writings/">← All writings</a>
-  <article>
-    <header class="page-head">
-      <p class="meta">
-        {fmt.format(entry.data.date)}{entry.data.source && ` · ${entry.data.source}`}
-      </p>
-      <h1>{entry.data.title}</h1>
-    </header>
-    <div class="prose">
-      <Content />
-    </div>
-  </article>
+  <div class="wrap">
+    <a class="back" href="/writings/"><span aria-hidden="true">←</span> All writings</a>
+    <article class="article">
+      <header class="page-head">
+        <div class="tags" style="margin-bottom: 1.25rem">
+          <span class="tag tag-accent">{kind}</span>
+          {entry.data.source && <span class="tag">{entry.data.source}</span>}
+        </div>
+        <p class="article-meta">
+          <time datetime={entry.data.date.toISOString().slice(0, 10)}>{fmt.format(entry.data.date)}</time>
+        </p>
+        <h1 class="display">{entry.data.title}<span class="dot">.</span></h1>
+        {entry.data.description && <p class="page-lede">{entry.data.description}</p>}
+      </header>
+      <div class="prose">
+        <Content />
+      </div>
+    </article>
+    <Cta />
+  </div>
 </Base>

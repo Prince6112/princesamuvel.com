@@ -1,0 +1,20 @@
+---
+// A slim dashed row, used for smaller pieces of work such as the clinic ads.
+import type { Project } from '../site';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<div class="line-item">
+  <div class="line-item-main">
+    <h3 class="project-slug">
+      + {project.slug ?? project.title}<span class="dot">_</span>
+    </h3>
+    <p>{project.summary}</p>
+  </div>
+  <span class="line-item-meta">{project.kind}{project.status && ` · ${project.status}`}</span>
+</div>

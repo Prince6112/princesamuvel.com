@@ -1,46 +1,231 @@
 ---
 import Base from '../layouts/Base.astro';
-import EntryList from '../components/EntryList.astro';
+import SectionHead from '../components/SectionHead.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import LineItem from '../components/LineItem.astro';
+import EntryList from '../components/EntryList.astro';
 import Cta from '../components/Cta.astro';
-import { site, websites, marketing } from '../site';
+import { site, websites, marketing, apps, books } from '../site';
 import { getWritings } from '../writings';
 
 const latest = (await getWritings()).slice(0, 3);
-const featured = [...websites, ...marketing].filter((p) => p.featured);
+const featured = websites.filter((p) => p.featured);
+const [firstName, ...rest] = site.name.split(' ');
+const lastName = rest.join(' ');
+
+// Background network for the hero: points and the lines between them.
+const nodes: [number, number, number][] = [
+  [120, 140, 11], [250, 90, 8], [380, 150, 10], [520, 80, 12], [660, 140, 9], [800, 90, 11],
+  [900, 180, 8], [180, 280, 9], [320, 250, 12], [460, 270, 8], [600, 240, 11], [740, 280, 9],
+  [880, 320, 12], [100, 420, 10], [260, 400, 8], [420, 430, 11], [580, 390, 9], [720, 440, 12],
+  [860, 470, 8], [200, 540, 11], [500, 540, 9], [780, 560, 10],
+];
+const links: [number, number][] = [
+  [0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [0, 7], [1, 8], [2, 8], [2, 9], [3, 10],
+  [4, 10], [4, 11], [6, 12], [5, 11], [7, 8], [8, 9], [9, 10], [10, 11], [11, 12], [7, 13],
+  [7, 14], [8, 14], [9, 15], [10, 16], [11, 17], [12, 18], [13, 14], [14, 15], [15, 16],
+  [16, 17], [17, 18], [13, 19], [14, 19], [15, 20], [16, 20], [17, 21], [18, 21], [19, 20],
+  [20, 21],
+];
+const netPath = links
+  .map(([a, b]) => `M${nodes[a][0]} ${nodes[a][1]}L${nodes[b][0]} ${nodes[b][1]}`)
+  .join('');
 ---
 
 <Base>
-  <section class="hero">
-    <p class="eyebrow">{site.location}</p>
-    <h1>Hi, I'm Prince.</h1>
-    <p class="lede">
-      I build things for the web, and I write down what God puts on my heart. By day I'm a data
-      scientist in healthcare. This is where the building and the writing live.
-    </p>
-    <div class="hero-links">
-      <a class="button primary" href="/work/">See my work</a>
-      <a class="button" href="/writings/">Read the writings</a>
+  <!-- Hero -->
+  <section class="hero" aria-labelledby="hero-name">
+    <svg
+      class="hero-net"
+      viewBox="0 0 1000 600"
+      preserveAspectRatio="xMidYMid slice"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d={netPath} stroke="#3DDC97" stroke-opacity="0.28" stroke-width="2.2" fill="none"></path>
+      <g fill="#3DDC97" fill-opacity="0.28" stroke="#3DDC97" stroke-opacity="0.55" stroke-width="1.5">
+        {nodes.map(([x, y, r]) => <circle cx={x} cy={y} r={r} />)}
+      </g>
+    </svg>
+    <div class="hero-shade" aria-hidden="true"></div>
+
+    <span class="hero-corner tl"><span class="live-dot" aria-hidden="true"></span>{site.heroLeft}</span>
+    <span class="hero-corner tr">{site.heroRight}</span>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">{site.role}</p>
+      <h1 id="hero-name" class="hero-name">
+        <span>{firstName}</span>
+        <span class="faded">{lastName}<span class="dot">.</span></span>
+      </h1>
+      <p class="hero-lede">{site.intro}</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#work">Explore my work <span aria-hidden="true">↗</span></a>
+        <a class="btn btn-ghost" href="#writings">Read the writings <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+
+    <div class="hero-corner bl">
+      <span class="corner-label">Connect</span>
+      <a href={site.links.github} target="_blank" rel="me noopener">GitHub ↗</a>
+      <a href={site.links.linkedin} target="_blank" rel="me noopener">LinkedIn ↗</a>
+      <a href={`mailto:${site.email}`}>Let's talk ↗</a>
+    </div>
+    <div class="hero-corner br">
+      <span class="corner-label">Currently into</span>
+      <ul>
+        {site.currentlyInto.map((item) => <li>{item}</li>)}
+      </ul>
     </div>
   </section>
 
-  <section class="section">
-    <div class="section-head">
-      <h2>Selected work</h2>
-      <a class="more" href="/work/">All work →</a>
-    </div>
-    <div class="cards">
-      {featured.map((project) => <ProjectCard project={project} />)}
-    </div>
-  </section>
+  <div class="wrap">
+    <!-- 01 The approach -->
+    <section id="approach" class="section" aria-labelledby="approach-title">
+      <p class="eyebrow rule-label">01 / The approach</p>
+      <div class="split">
+        <h2 id="approach-title" class="display">
+          <span class="line">Faithful with</span>
+          <span class="line faded">what I've been given<span class="dot">.</span></span>
+        </h2>
+        <div class="split-body">
+          <p>
+            I'm Prince, a data scientist in healthcare, based in Pune. Outside of work I build
+            websites for small businesses and the people around me, and I write.
+          </p>
+          <p>
+            This site started with Matthew 25. Each servant in that parable was trusted with
+            something and asked to be faithful with it. Building for the web and writing are what
+            I have been given, so this is where I put them to use.
+          </p>
+          <div class="code-note">
+            <span class="comment">// the short version</span>
+            <span><span class="kw">while</span> (faithful) {'{ build(); write(); }'}</span>
+          </div>
+          <a class="mono-link strong" href="/about/">A little more about me <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="toolkit">
+        <p class="eyebrow">My everyday toolkit</p>
+        <ul>
+          {site.toolkit.map((tool) => <li>{tool}</li>)}
+        </ul>
+      </div>
+    </section>
 
-  <section class="section">
-    <div class="section-head">
-      <h2>Latest writings</h2>
-      <a class="more" href="/writings/">All writings →</a>
-    </div>
-    <EntryList entries={latest} />
-  </section>
+    <!-- 02 Work -->
+    <section id="work" class="section" aria-label="Work">
+      <SectionHead
+        index="02"
+        label="Built with care"
+        title="Things I've built"
+        note="Websites for small businesses, ventures and people I care about."
+        link={{ href: '/work/', label: 'All work' }}
+      />
+      <div class="cards">
+        {
+          featured.map((project, i) => (
+            <ProjectCard project={project} index={i + 1} total={featured.length} />
+          ))
+        }
+      </div>
+      {marketing.map((project) => <LineItem project={project} />)}
+    </section>
 
-  <Cta />
+    <!-- 03 Apps -->
+    <section id="apps" class="section" aria-label="Apps">
+      <SectionHead
+        index="03"
+        label="Made for me"
+        title="Apps behind the lock"
+        note="Tools I built for my own use. They will live on this site, behind a sign-in."
+      />
+      <div class="cards">
+        {apps.map((project, i) => <ProjectCard project={project} index={i + 1} total={apps.length} />)}
+      </div>
+    </section>
+
+    <!-- 04 Writings -->
+    <section id="writings" class="section" aria-label="Writings">
+      <SectionHead index="04" label="Field notes" title="What God puts on my heart" />
+      <EntryList entries={latest} />
+      <a class="mono-link" href="/writings/">More from the notebook <span aria-hidden="true">→</span></a>
+    </section>
+
+    <!-- 05 By day -->
+    <section id="by-day" class="section" aria-labelledby="byday-title">
+      <div class="byday">
+        <div class="byday-visual">
+          {
+            site.photo ? (
+              <img src={site.photo} alt={`Photo of ${site.name}`} loading="lazy" />
+            ) : (
+              <>
+                <div class="terminal-bar" aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+                <div class="terminal" role="group" aria-label="Summary of my day job">
+                  <p><span class="prompt">$</span> whoami</p>
+                  <p class="out">data scientist, healthcare</p>
+                  <p><span class="prompt">$</span> focus</p>
+                  <p class="out">risk scoring · analysis that holds up</p>
+                  <p><span class="prompt">$</span> learning</p>
+                  <p class="out">agentic AI · RAG · multi-agent systems</p>
+                </div>
+              </>
+            )
+          }
+          <span class="byday-caption"><span class="live-dot" aria-hidden="true"></span>Analysis that holds up.</span>
+        </div>
+        <div class="byday-body">
+          <p class="eyebrow">05 / By day</p>
+          <h2 id="byday-title" class="display">
+            <span class="line">From data</span>
+            <span class="line">to decisions<span class="dot">.</span></span>
+          </h2>
+          <p>
+            I work as a data scientist in healthcare, where I build risk scoring models and answer
+            business questions with data. The work is reviewed closely, so I care about analysis
+            that holds up when someone checks it.
+          </p>
+          <p>
+            I've also completed a Professional Certificate Programme in Agentic AI and Applications
+            from IITM Pravartak (IIT Madras), covering RAG pipelines and multi-agent orchestration
+            with LangChain, CrewAI and AutoGen.
+          </p>
+          {
+            site.resume && (
+              <a class="mono-link strong" href={site.resume}>
+                Résumé (PDF) <span aria-hidden="true">↗</span>
+              </a>
+            )
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 Shelf -->
+    <section id="shelf" class="section" aria-label="Books">
+      <SectionHead
+        index="06"
+        label="On my shelf"
+        title="Books that shaped me"
+        link={{ href: '/recommendations/', label: 'All recommendations' }}
+      />
+      <ul class="shelf">
+        {
+          books.map((book) => (
+            <li>
+              <span class="shelf-title">{book.title}</span>
+              <span class="shelf-author">{book.author}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <Cta />
+  </div>
 </Base>

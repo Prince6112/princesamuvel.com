@@ -1,48 +1,90 @@
 ---
 import { existsSync } from 'node:fs';
+import Icon from './Icon.astro';
 import type { Project } from '../site';
 
 interface Props {
   project: Project;
+  index: number; // position, starting at 1
+  total: number;
+  detailed?: boolean; // also list the bullet points
 }
 
-const { project } = Astro.props;
+const { project, index, total, detailed = false } = Astro.props;
 
 // Only show the screenshot if the file is actually in the public folder.
 const hasImage = project.image ? existsSync(`./public${project.image}`) : false;
+const counter = `${String(index).padStart(2, '0')} / ${String(total).padStart(3, '0')}`;
 ---
 
-<article class="card">
-  {
-    hasImage && (
-      <img
-        class="card-shot"
-        src={project.image}
-        alt={`Screenshot of the ${project.title} website`}
-        loading="lazy"
-      />
-    )
-  }
-  <div class="card-top">
-    <span class="kind">{project.kind}</span>
-    {project.status && <span class="status">{project.status}</span>}
+<article class="project">
+  <div class={`project-visual tone-${project.tone ?? 'teal'}`}>
+    <span class="project-count">{counter}</span>
+    {
+      hasImage ? (
+        <img
+          src={project.image}
+          alt={`Screenshot of the ${project.title} website`}
+          width="1200"
+          height="750"
+          loading="lazy"
+          decoding="async"
+        />
+      ) : (
+        <div class="project-icon">
+          <Icon name={project.icon ?? 'work'} size={60} />
+          {project.caption && <span>{project.caption}</span>}
+        </div>
+      )
+    }
   </div>
-  <h3>{project.title}</h3>
-  <p>{project.summary}</p>
-  {
-    project.points.length > 0 && (
-      <ul>
-        {project.points.map((point) => (
-          <li>{point}</li>
-        ))}
-      </ul>
-    )
-  }
-  {
-    project.url && (
-      <a class="card-link" href={project.url} target="_blank" rel="noopener">
-        {project.linkLabel ?? 'Visit'} →
-      </a>
-    )
-  }
+  <div class="project-body">
+    <div class="project-title-row">
+      <h3 class="project-slug">
+        {project.slug ?? project.title}<span class="dot">_</span>
+      </h3>
+      {
+        project.status ? (
+          <span class="pill">{project.status}</span>
+        ) : (
+          project.url && (
+            <span class="project-arrow" aria-hidden="true">
+              ↗
+            </span>
+          )
+        )
+      }
+    </div>
+    <p class="project-name">{project.title}</p>
+    <p class="project-summary">{project.summary}</p>
+    {
+      detailed && project.points.length > 0 && (
+        <ul class="project-points">
+          {project.points.map((point) => (
+            <li>{point}</li>
+          ))}
+        </ul>
+      )
+    }
+    <div class="project-foot">
+      <span class="project-tag">
+        <span class="tag-dot" style={`background: ${project.dot ?? 'var(--accent)'}`} />
+        {project.tag ?? project.kind}
+      </span>
+      {
+        project.url ? (
+          <a class="project-link" href={project.url} target="_blank" rel="noopener">
+            {project.linkLabel ?? 'Visit'} <span aria-hidden="true">↗</span>
+            <span class="visually-hidden"> {project.title} (opens in a new tab)</span>
+          </a>
+        ) : (
+          project.kind === 'App' && (
+            <span class="project-soon">
+              <Icon name="lock" size={14} /> Sign-in coming soon
+            </span>
+          )
+        )
+      }
+    </div>
+  </div>
 </article>

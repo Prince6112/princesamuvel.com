@@ -16,27 +16,33 @@ const items = await Promise.all(
 );
 ---
 
-<ul class="entries">
+<ol class="entries">
   {
-    items.map(({ entry, Content }) => (
-      <li>
-        <span class="meta">
-          {fmt.format(entry.data.date)} · {entry.data.type === 'note' ? 'Note' : 'Reflection'}
-        </span>
-        {Content ? (
-          <blockquote class="note">
-            <Content />
-            {entry.data.source && <footer>{entry.data.source}</footer>}
-          </blockquote>
-        ) : (
-          <div>
-            <a class="entry-title" href={`/writings/${entry.id}/`}>
-              {entry.data.title}
-            </a>
-            {entry.data.description && <p>{entry.data.description}</p>}
+    items.map(({ entry, Content }, i) => (
+      <li class="entry">
+        <span class="entry-num">{String(i + 1).padStart(2, '0')}</span>
+        <div class="entry-main">
+          <div class="tags">
+            <span class="tag tag-accent">{entry.data.type === 'note' ? 'Note' : 'Reflection'}</span>
+            {entry.data.source && <span class="tag">{entry.data.source}</span>}
           </div>
-        )}
+          {Content ? (
+            <blockquote class="entry-note">
+              <Content />
+            </blockquote>
+          ) : (
+            <>
+              <h3 class="entry-title">
+                <a href={`/writings/${entry.id}/`}>{entry.data.title}</a>
+              </h3>
+              {entry.data.description && <p class="entry-desc">{entry.data.description}</p>}
+            </>
+          )}
+        </div>
+        <time class="entry-date" datetime={entry.data.date.toISOString().slice(0, 10)}>
+          {fmt.format(entry.data.date)}
+        </time>
       </li>
     ))
   }
-</ul>
+</ol>

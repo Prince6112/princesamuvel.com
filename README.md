@@ -1,6 +1,6 @@
 # princesamuvel.com
 
-Personal site: writings and a showcase of work. Built with [Astro](https://astro.build), deployed from GitHub to Cloudflare.
+Personal site: writings and a showcase of work. Built with [Astro](https://astro.build), deployed from GitHub to Cloudflare. Dark theme: Instrument Serif headings, Manrope body, IBM Plex Mono labels.
 
 ## Run it locally
 
@@ -54,11 +54,27 @@ git push
 
 ## Edit other content
 
-- Name, tagline, links and all project cards: `src/site.ts`
-- Home page intro: `src/pages/index.astro`
+- Name, intro line, links, project cards and books: `src/site.ts`
+- Also in `src/site.ts`: the hero corner labels, the "Now building" link at the top
+  right (set `now` to `null` to hide it), "Currently into", and the toolkit list
+- Home page sections and their headings: `src/pages/index.astro`
 - About page: `src/pages/about.astro`
 - Data science section: `src/pages/work.astro`
 - Colours and fonts: the `:root` block at the top of `src/styles/global.css`
+  (green accent is `--accent`)
+
+### Add your résumé or photo
+
+- Résumé: put the PDF at `public/resume.pdf`, then set `resume: '/resume.pdf'` in
+  `src/site.ts`. Résumé links appear on the home, Work and About pages.
+- Photo: put it at `public/photo.jpg`, then set `photo: '/photo.jpg'`. It replaces the
+  terminal panel in the "By day" section of the home page.
+
+### Project cards
+
+Each card can take an optional `slug` (the monospaced name), `tag` and `dot` (the label
+and coloured dot at the bottom left), `tone` (the background behind the screenshot:
+teal, blue, plum or green), and for cards without a screenshot an `icon` and `caption`.
 
 ## Deploy on Cloudflare
 

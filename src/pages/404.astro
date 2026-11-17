@@ -1,11 +1,16 @@
 ---
 import Base from '../layouts/Base.astro';
+import SectionHead from '../components/SectionHead.astro';
 ---
 
 <Base title="Page not found">
-  <header class="page-head">
-    <p class="eyebrow">404</p>
-    <h1>That page isn't here.</h1>
-    <p class="lede"><a href="/">Go back home</a></p>
-  </header>
+  <div class="wrap">
+    <header class="page-head" style="min-height: 55vh">
+      <SectionHead level="h1" label="404" title="That page isn't here" />
+      <p class="page-lede">It may have moved, or the link may be mistyped.</p>
+      <p style="margin-top: 2rem">
+        <a class="btn btn-primary" href="/">Go back home <span aria-hidden="true">↗</span></a>
+      </p>
+    </header>
+  </div>
 </Base>

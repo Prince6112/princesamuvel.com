@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import SectionHead from '../../components/SectionHead.astro';
 import EntryList from '../../components/EntryList.astro';
 import { getWritings } from '../../writings';
 
@@ -7,13 +8,14 @@ const entries = await getWritings();
 ---
 
 <Base title="Writings" description="Reflections, thoughts and quotes worth keeping.">
-  <header class="page-head">
-    <p class="eyebrow">Writings</p>
-    <h1>Thoughts worth keeping</h1>
-    <p class="lede">
-      Reflections from what I'm reading and hearing, and the occasional quote I don't want to
-      forget.
-    </p>
-  </header>
-  <EntryList entries={entries} />
+  <div class="wrap">
+    <header class="page-head">
+      <SectionHead level="h1" label="Writings" title="Thoughts worth keeping" />
+      <p class="page-lede">
+        Reflections from what I'm reading and hearing, and the occasional quote I don't want to
+        forget.
+      </p>
+    </header>
+    <EntryList entries={entries} />
+  </div>
 </Base>

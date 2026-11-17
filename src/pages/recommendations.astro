@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import SectionHead from '../components/SectionHead.astro';
 import { books } from '../site';
 ---
 
@@ -7,29 +8,33 @@ import { books } from '../site';
   title="My Recommendations"
   description="Books and videos that made a profound impact on Prince Samuvel."
 >
-  <header class="page-head">
-    <p class="eyebrow">My Recommendations</p>
-    <h1>What shaped me</h1>
-    <p class="lede">The books and YouTube videos that have made a profound impact on me.</p>
-  </header>
+  <div class="wrap">
+    <header class="page-head">
+      <SectionHead level="h1" label="My Recommendations" title="What shaped me" />
+      <p class="page-lede">The books and YouTube videos that have made a profound impact on me.</p>
+    </header>
 
-  <section>
-    <div class="section-head"><h2>Books</h2></div>
-    <ol class="recs">
-      {
-        books.map((book) => (
-          <li>
-            <h3>{book.title}</h3>
-            <p class="meta">{book.author}</p>
-            <p>{book.note}</p>
-          </li>
-        ))
-      }
-    </ol>
-  </section>
+    <section aria-labelledby="books-label">
+      <p id="books-label" class="eyebrow rule-label" style="border-bottom: 0">01 / Books</p>
+      <ol class="recs">
+        {
+          books.map((book, i) => (
+            <li>
+              <span class="entry-num">{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <h3>{book.title}</h3>
+                <span class="shelf-author">{book.author}</span>
+                <p>{book.note}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
 
-  <section class="section">
-    <div class="section-head"><h2>YouTube videos</h2></div>
-    <p class="meta">Coming soon. The list will be uploaded here.</p>
-  </section>
+    <section class="sub-section" aria-labelledby="videos-label">
+      <p id="videos-label" class="eyebrow" style="border-bottom: 0; margin-bottom: 0">02 / YouTube videos</p>
+      <p class="soon">Coming soon. The list will be uploaded here.</p>
+    </section>
+  </div>
 </Base>
