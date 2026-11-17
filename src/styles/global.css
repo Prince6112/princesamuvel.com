@@ -543,6 +543,37 @@ a:hover {
   margin-top: 0.5rem;
 }
 
+/* Phones: keep both buttons on one row, sharing the width. */
+@media (max-width: 640px) {
+  .hero-actions {
+    flex-wrap: nowrap;
+    width: 100%;
+    gap: 0.6rem;
+  }
+  .hero-actions .btn {
+    flex: 1 1 0;
+    min-width: 0;
+    gap: 0.6rem;
+    padding: 0 0.85rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .hero {
+    padding-inline: 0.75rem;
+  }
+  .hero-content {
+    width: 100%;
+  }
+  .hero-actions .btn {
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0 0.5rem;
+    font-size: 0.8rem;
+  }
+}
+
 .hero-corner {
   position: absolute;
   font-family: var(--mono);
